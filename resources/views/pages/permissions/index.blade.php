@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-<title>LIST SEWA | Permissions</title>
+<title>LIST PO IMX | Permissions</title>
 
 
 @section('content')

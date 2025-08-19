@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-<title>LIST SEWA | Users</title>
+<title>LIST PO IMX | Users</title>
 
 @section('content')
 <div class="page-content">

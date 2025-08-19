@@ -5,21 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TypeContractController;
-use App\Http\Controllers\ContractController;
-use App\Http\Controllers\TransactionsController;
-use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DetailsController;
-use App\Http\Controllers\InsertContractController;
-use App\Http\Controllers\QuotesController;
-use App\Http\Controllers\RegionController;
-use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\ReportsHabisController;
-use Illuminate\Support\Facades\Request;
-
-// use App\Exports\ContractsExport;
-// use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,11 +22,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('dashboard');
-Route::get('/api/contracts-chart', [DashboardController::class, 'getChartData'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('getChartData');
-Route::get('/api/getKFChartData', [DashboardController::class, 'getKFChartData'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('getKFChartData');
-Route::get('/api/countKFTotal', [DashboardController::class, 'countKFTotal'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('countKFTotal');
-Route::get('/api/yearly-contracts', [DashboardController::class, 'getYearlyContractsJson'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('countPendapatanTotal');
-
 
 Route::middleware('auth')->group(function () {
 

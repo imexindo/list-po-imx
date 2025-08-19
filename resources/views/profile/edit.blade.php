@@ -1,4 +1,4 @@
-<title>LIST SEWA | Profile</title>
+<title>LIST PO IMX | Profile</title>
 
 <x-app-layout>
     <x-slot name="header">

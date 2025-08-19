@@ -18,8 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        $quotes = Quotes::all();
-        return view('auth.login', compact('quotes'));
+        return view('auth.login');
     }
 
     /**

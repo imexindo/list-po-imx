@@ -8,7 +8,7 @@
                     <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24" class="mt-4">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24"> <span class="logo-txt">IMEX LIST SEWA</span>
+                    <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24"> <span class="logo-txt">IMEX LIST PO IMX</span>
                 </span>
             </a>
 
@@ -17,7 +17,7 @@
                     <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24"> <span class="logo-txt">IMEX LIST SEWA</span>
+                    <img src="{{ asset('cms/assets/img/logo.png') }}" alt="" height="24"> <span class="logo-txt">IMEX LIST PO IMX</span>
                 </span>
             </a>
         </div>

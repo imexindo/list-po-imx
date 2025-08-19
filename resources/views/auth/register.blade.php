@@ -1,7 +1,7 @@
 <html lang="en"><head>
 
     <meta charset="utf-8">
-    <title>Login | SMB List Sewa - Minimal Admin &amp; Dashboard Template</title>
+    <title>Login | SMB LIST PO IMX - Minimal Admin &amp; Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -43,7 +43,7 @@
                                 <div class="auth-content my-auto">
                                     <div class="text-center">
                                         <h5 class="mb-0">Welcome Back !</h5>
-                                        <p class="text-muted mt-2">Sign up to IMEX to SMB List Sewa.</p>
+                                        <p class="text-muted mt-2">Sign up to IMEX to SMB LIST PO IMX.</p>
                                     </div>
                                     <form method="POST" action="{{ route('register') }}">
                                         @csrf
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">
-                                    <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> SMB IMEX List Sewa <br> Crafted with <i class="mdi mdi-heart text-danger"></i> by SMB List Sewa</p>
+                                    <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> SMB IMEX LIST PO IMX <br> Crafted with <i class="mdi mdi-heart text-danger"></i> by SMB LIST PO IMX</p>
                                 </div>
                             </div>
                         </div>
