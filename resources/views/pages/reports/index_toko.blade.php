@@ -1,0 +1,488 @@
+@extends('layouts.main')
+
+
+<title>LIST SEWA | Laporan Toko</title>
+
+
+<style>
+    /* Optional: Ensure the table container has a width of 100% for scrolling to work */
+    .dataTables_wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+</style>
+
+@section('content')
+    <div class="page-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Transaksi</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Laporan</li>
+                            <li class="breadcrumb-item active">Toko</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-11">
+                <div class="row">
+                    <div class="col">
+                        <label for="">PERIODE TGL BAP</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="date" class="form-control" name="from" id="from"
+                                aria-describedby="helpId" value="{{ request('from') }}">
+                            <small>Dari</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="date" class="form-control" name="to" id="to"
+                                aria-describedby="helpId" value="{{ request('to') }}">
+                            <small>Sampai</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button id="FilterButtonReport" class="btn btn-success">
+                            <i class="fa fa-filter"></i> SUBMIT
+                        </button>
+                        <button id="exportButtonReport" class="btn btn-primary">
+                            <i class="fa fa-file-excel"></i> EXPORT
+                        </button>
+                        <button id="refresh" class="btn btn-outline-secondary px-3">
+                            <i class="fa fa-refresh"></i> RESET
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <table id="typeContractTable" class="table table-striped">
+                    <thead>
+                        <tr id="headerRow">
+                            <th>No</th>
+                            <th></th>
+                            <th>Keterangan</th>
+                            <th>Tahun</th>
+                            <th>Jumlah SPK</th>
+                            <th>KF-15</th>
+                            <th>KF-20</th>
+                            <th>KF-23</th>
+                            <th>KF-26</th>
+                            <th>KF-34</th>
+                            <th>KF-50</th>
+                            <th>KF-70</th>
+                            <th>KF-100</th>
+                            <th>KF-120</th>
+                            <th>SD-70</th>
+                            <th>SD-90</th>
+                            <th>SD-120</th>
+                            <th>DB-60</th>
+                            <th>DB-80</th>
+                            <th>DB-100</th>
+                            <th>DB-150</th>
+                            <th>DB-200</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($reports as $index => $report)
+                        {{-- @dd($report->contract_id); --}}
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>
+                                    @if ($report->contract)
+                                        <button class="btn btn-sm btn-danger btn-export-contract"
+                                            data-contacts-id="{{ $report->contract->id }}">
+                                            <i class="fa fa-file-excel"></i> EXPORT
+                                        </button>
+
+                                        <button class="btn btn-sm btn-primary btn-view-contract"
+                                            data-id="{{ $report->contract->id }}">
+                                            <i class="fa fa-eye"></i> VIEW
+                                        </button>
+                                    @else
+                                        <p>Tidak Ada</p>
+                                    @endif
+                                </td>
+                                <td>{{ $report->contract ? $report->contract->code : 'Tidak Ada' }} </td>
+                                <td>{{ $report->contract ? $report->contract->year : 'Tidak Ada' }}</td>
+                                <td>{{ $report->total_spk }} SPK</td>
+                                <td>{{ $report->kf_15 }}</td>
+                                <td>{{ $report->kf_20 }}</td>
+                                <td>{{ $report->kf_23 }}</td>
+                                <td>{{ $report->kf_26 }}</td>
+                                <td>{{ $report->kf_34 }}</td>
+                                <td>{{ $report->kf_50 }}</td>
+                                <td>{{ $report->kf_70 }}</td>
+                                <td>{{ $report->kf_100 }}</td>
+                                <td>{{ $report->kf_120 }}</td>
+                                <td>{{ $report->sd_70 }}</td>
+                                <td>{{ $report->sd_90 }}</td>
+                                <td>{{ $report->sd_120 }}</td>
+                                <td>{{ $report->db_60 }}</td>
+                                <td>{{ $report->db_80 }}</td>
+                                <td>{{ $report->db_100 }}</td>
+                                <td>{{ $report->db_150 }}</td>
+                                <td>{{ $report->db_200 }}</td>
+                                <td>{{ number_format($report->total_biaya, 0, ',', '.') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">GRAND TOTAL</th>
+                            <th id="total-spk"></th>
+                            <th id="total-kf-15"></th>
+                            <th id="total-kf-20"></th>
+                            <th id="total-kf-23"></th>
+                            <th id="total-kf-26"></th>
+                            <th id="total-kf-34"></th>
+                            <th id="total-kf-50"></th>
+                            <th id="total-kf-70"></th>
+                            <th id="total-kf-100"></th>
+                            <th id="total-kf-120"></th>
+                            <th id="total-sd-70"></th>
+                            <th id="total-sd-90"></th>
+                            <th id="total-sd-120"></th>
+                            <th id="total-db-60"></th>
+                            <th id="total-db-80"></th>
+                            <th id="total-db-100"></th>
+                            <th id="total-db-150"></th>
+                            <th id="total-db-200"></th>
+                            <th id="total-harga">Rp 0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).ready(function() {
+
+                $('#exportButtonReport').on('click', function() {
+                    var from = $('#from').val();
+                    var to = $('#to').val();
+
+                    if (from && to) {
+                        window.location.href = `/reports/export-report?from=${from}&to=${to}`;
+                        Swal.close();
+                    } else {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: 'Silakan pilih tanggal BAP awal dan akhir',
+                            icon: 'info',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+
+                $('#FilterButtonReport').on('click', function() {
+                    const from = $('#from').val();
+                    const to = $('#to').val();
+
+                    if (from === '' || to === '') {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: 'Silakan pilih tanggal BAP awal dan akhir',
+                            icon: 'info',
+                            confirmButtonText: 'OK'
+                        });
+                        return;
+                    }
+
+                    window.location.href = `/reports/report/toko?from=${from}&to=${to}`;
+                });
+
+
+
+                $('#refresh').on('click', function() {
+                    window.location.href = `/reports/report/toko`;
+                });
+
+                $('#typeContractTable tbody').on('click', '.btn-view-contract', function() {
+                    if ($(this).hasClass('btn-export-contract')) {
+                        return;
+                    }
+
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+                    var reportId = $(this).data('id');
+
+                    // ✅ Ambil value, bukan elemen
+                    let from = $('#from').val();
+                    let to = $('#to').val();
+
+                    if (row.child.isShown()) {
+                        row.child.hide();
+                        tr.removeClass('shown');
+                        $(this).find('i').removeClass('fa-minus').addClass('fa-eye');
+                    } else {
+                        row.child(format(reportId)).show();
+                        tr.addClass('shown');
+                        $(this).find('i').removeClass('fa-eye').addClass('fa-minus');
+
+                        Swal.fire({
+                            title: 'Loading...',
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        $.ajax({
+                            url: `/reports/details/toko/${reportId}?from=${from}&to=${to}`,
+                            method: 'GET',
+                            success: function(data) {
+                                $('#details-' + reportId).html(data.map((item, index) => `
+                                    <tr>
+                                        <td class="text-center">${index + 1}</td>
+                                          <td class="text-center">
+                                            <button 
+                                                class="btn btn-sm btn-primary btn-detail-toko" 
+                                                data-contacts-id="${btoa(item.contacts_id)}" 
+                                                data-region-id="${btoa(item.region_id)}">
+                                                <i class="fa fa-paper-plane"></i> SPK
+                                            </button>
+                                        </td>
+                                        <td class="text-left">${item.region_name}</td>
+                                        <td class="text-center">${item.total_spk}</td>
+                                        <td class="text-center">${item.kf_15}</td>
+                                        <td class="text-center">${item.kf_20}</td>
+                                        <td class="text-center">${item.kf_23}</td>
+                                        <td class="text-center">${item.kf_26}</td>
+                                        <td class="text-center">${item.kf_34}</td>
+                                        <td class="text-center">${item.kf_50}</td>
+                                        <td class="text-center">${item.kf_70}</td>
+                                        <td class="text-center">${item.kf_100}</td>
+                                        <td class="text-center">${item.kf_120}</td>
+                                        <td class="text-center">${item.sd_70}</td>
+                                        <td class="text-center">${item.sd_90}</td>
+                                        <td class="text-center">${item.sd_120}</td>
+                                        <td class="text-center">${item.db_60}</td>
+                                        <td class="text-center">${item.db_80}</td>
+                                        <td class="text-center">${item.db_100}</td>
+                                        <td class="text-center">${item.db_150}</td>
+                                        <td class="text-center">${item.db_200}</td>
+                                        <td class="text-center">${new Intl.NumberFormat('id-ID').format(item.total_biaya)}</td>
+                                    </tr>
+                                `).join(''));
+                            },
+                            error: function() {
+                                $('#details-' + reportId).html(
+                                    '<tr><td colspan="20" class="text-center">Gagal memuat detail</td></tr>'
+                                );
+                            },
+                            complete: function() {
+                                Swal.close();
+                            }
+                        });
+                    }
+                });
+
+                function format(id) {
+                    return `
+                        <table class="table table-striped table-info" cellpadding="5" cellspacing="0" border="0" style="margin-left: 15px;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Detail</th>
+                                    <th class="text-left" style="width: 200px;">DC</th>
+                                    <th class="text-center">Total SPK</th>
+                                    <th class="text-center">KF-15</th>
+                                    <th class="text-center">KF-20</th>
+                                    <th class="text-center">KF-23</th>
+                                    <th class="text-center">KF-26</th>
+                                    <th class="text-center">KF-34</th>
+                                    <th class="text-center">KF-50</th>
+                                    <th class="text-center">KF-70</th>
+                                    <th class="text-center">KF-100</th>
+                                    <th class="text-center">KF-120</th>
+                                    <th class="text-center">SD-70</th>
+                                    <th class="text-center">SD-90</th>
+                                    <th class="text-center">SD-120</th>
+                                    <th class="text-center">DB-60</th>
+                                    <th class="text-center">DB-80</th>
+                                    <th class="text-center">DB-100</th>
+                                    <th class="text-center">DB-150</th>
+                                    <th class="text-center">DB-200</th>
+                                    <th class="text-center">Total Biaya</th>
+                                </tr>
+                            </thead>
+                            <tbody id="details-${id}">
+                                <tr>
+                                    <td colspan="18" class="text-center">Tampilkan di sini...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                }
+
+                var table = $('#typeContractTable').DataTable({
+                    scrollX: true,
+                    columnDefs: [{
+                            width: '5%',
+                            targets: 0
+                        },
+                        {
+                            width: 150,
+                            targets: 1
+                        },
+                        {
+                            width: 100,
+                            targets: 2
+                        },
+                        {
+                            width: 50,
+                            targets: 3
+                        },
+                        {
+                            width: 100,
+                            className: 'text-center',
+                            targets: 4
+                        },
+                        {
+                            width: 70,
+                            className: 'text-center',
+                            targets: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                21
+                            ]
+                        },
+                        {
+                            width: 100,
+                            targets: 22
+                        }
+                    ],
+                    drawCallback: function() {
+                        var api = this.api();
+
+                        var totalSPK = api
+                            .column(4, {
+                                page: 'current'
+                            })
+                            .data()
+                            .reduce(function(a, b) {
+                                return a + parseInt(b) || 0;
+                            }, 0);
+
+                        var totalHarga = api
+                            .column(22, {
+                                page: 'current'
+                            })
+                            .data()
+                            .reduce(function(a, b) {
+                                return a + parseFloat(b.replace(/[^\d]/g, '')) || 0;
+                            }, 0);
+
+                        $(api.column(4).footer()).html('{{ $totalSpk }}' + ' SPK');
+                        $(api.column(22).footer()).html(new Intl.NumberFormat('id-ID').format(
+                            {{ $total }}));
+                        $(api.column(5).footer()).html({{ $kf15 }});
+                        $(api.column(6).footer()).html({{ $kf20 }});
+                        $(api.column(7).footer()).html({{ $kf23 }});
+                        $(api.column(8).footer()).html({{ $kf26 }});
+                        $(api.column(9).footer()).html({{ $kf34 }});
+                        $(api.column(10).footer()).html({{ $kf50 }});
+                        $(api.column(11).footer()).html({{ $kf70 }});
+                        $(api.column(12).footer()).html({{ $kf100 }});
+                        $(api.column(13).footer()).html({{ $kf120 }});
+                        $(api.column(14).footer()).html({{ $sd70 }});
+                        $(api.column(15).footer()).html({{ $sd90 }});
+                        $(api.column(16).footer()).html({{ $sd120 }});
+                        $(api.column(17).footer()).html({{ $db60 }});
+                        $(api.column(18).footer()).html({{ $db80 }});
+                        $(api.column(19).footer()).html({{ $db100 }});
+                        $(api.column(20).footer()).html({{ $db150 }});
+                        $(api.column(21).footer()).html({{ $db200 }});
+                    }
+                });
+
+
+                // Klik tombol detail
+                $(document).on('click', '.btn-detail-toko', function() {
+                    let contactsId = $(this).data('contacts-id');
+                    let regionId = $(this).data('region-id');
+                    let from = $('#from').val();
+                    let to = $('#to').val();
+
+                    let url =
+                        `/reports/details/toko/${contactsId}/${regionId}?from=${from}&to=${to}`;
+                    window.open(url, '_blank');
+                });
+
+                // Klik tombol EXPORT CONTRACT
+                $(document).on('click', '.btn-export-contract', async function(e) {
+                    e.preventDefault();
+
+                    let contractId = $(this).data('contacts-id');
+                    let from = $('#from').val();
+                    let to = $('#to').val();
+
+                    Swal.fire({
+                        title: 'Sedang menyiapkan file...',
+                        text: 'Mohon tunggu hingga proses selesai',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    try {
+                        const response = await fetch(
+                            `/reports/details/export/${contractId}/contract?from=${from}&to=${to}`);
+                        const blob = await response.blob();
+
+                        let filename = "export.xlsx";
+                        const disposition = response.headers.get('Content-Disposition');
+                        if (disposition && disposition.indexOf('filename=') !== -1) {
+                            filename = disposition
+                                .split('filename=')[1]
+                                .replace(/"/g, '')
+                                .trim();
+                        }
+
+                        // Buat link download
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+
+                        window.URL.revokeObjectURL(url);
+                    } catch (err) {
+                        Swal.fire('Gagal', 'Terjadi kesalahan saat mengunduh file.', 'error');
+                        return;
+                    }
+
+                    Swal.close();
+                });
+
+
+
+
+            });
+        });
+    </script>
+@endsection
