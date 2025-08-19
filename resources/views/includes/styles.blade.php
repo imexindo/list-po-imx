@@ -15,9 +15,6 @@
 
 
 <style type="text/css">
-
-    
-
     .apexcharts-canvas {
         position: relative;
         user-select: none;

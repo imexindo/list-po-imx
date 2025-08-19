@@ -10,6 +10,15 @@
         @endcan
     </li>
 
+    <li class="">
+        @can('pasang_baru_access')
+            <a href="{{ route('pasang-baru.index') }}">
+                <i class="fa fa-calendar" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Pasang Baru</span>
+            </a>
+        @endcan
+    </li>
+
 
     <li>
         @canany(['permissions_access', 'roles_access', 'users_access'])

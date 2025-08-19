@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasangBaruController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::middleware(['permission:pasang_baru_access'])->prefix('pasang-baru')->group(function () {
+        Route::get('/', [PasangBaruController::class, 'index'])->name('pasang-baru.index');
+        Route::get('/get-spk', [PasangBaruController::class, 'getSpk'])->name('getSpk');
+    });
     Route::middleware(['permission:roles_access'])->prefix('roles')->group(function () {
         Route::get('/', [RolePermissionController::class, 'indexRoles'])->name('roles.index');
         Route::post('/store', [RolePermissionController::class, 'storeRole'])->name('roles.store');
