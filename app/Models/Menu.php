@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Menu extends Model
 {
     use HasFactory;
 
-    protected $table = 'm_category_cabut';
+    protected $table = 'm_menu';
 
     protected $fillable = [
-        'category',
+        'name'
     ];
 }

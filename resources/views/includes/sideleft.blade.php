@@ -11,6 +11,15 @@
     </li>
 
     <li class="">
+        @can('input_spk_access')
+            <a href="{{ route('input-spk.index') }}">
+                <i class="fa fa-keyboard" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Input SPK</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
         @can('pasang_baru_access')
             <a href="{{ route('pasang-baru.index') }}">
                 <i class="fa fa-calendar" style="font-size:16px"></i>

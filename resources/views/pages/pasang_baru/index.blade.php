@@ -2,6 +2,7 @@
 
 <title>PASANG BARU | IMX</title>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
     <div class="page-content">
@@ -19,16 +20,6 @@
                         </div>
                     </div>
                 </div>
-                @role(['superadministrator', 'staff', 'Manager'])
-                    <div class="col-md-4">
-                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                            <div>
-                                <button data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary"><i
-                                        class="bx bx-plus me-1"></i> Tambah</button>
-                            </div>
-                        </div>
-                    </div>
-                @endrole()
             </div>
             <!-- end page title -->
 
@@ -38,6 +29,7 @@
                         <thead class="thead-inverse">
                             <tr>
                                 <th>#</th>
+                                <th>Action</th>
                                 <th>PO</th>
                                 <th>SO</th>
                                 <th>SPK</th>
@@ -65,6 +57,7 @@
                                 <th>Ket</th>
                                 <th>Cabut</th>
                                 <th>Harga Sewa</th>
+                                <th>Created</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -72,50 +65,6 @@
 
                 </div>
             </div>
-
-
-            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                    <form id="spkForm" action="#" method="POST">
-                        @csrf
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="createModalLabel">Add</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <div class="mb-3">
-                                            <label for="title" class="form-label">NO SPK</label>
-                                            <input type="text" class="form-control" name="title" id="spkInput" required  placeholder="Masukan No SPK">
-                                        </div>
-                                    </div>
-                                    <div class="col mt-4">
-                                        <button type="button" id="cekSpkBtn" class="btn btn-primary px-3 py-3">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                          <label for="po">PO</label>
-                                          <input type="text"
-                                            class="form-control" name="po" id="po" aria-describedby="helpId" placeholder="PO">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
 
 
         </div>
@@ -128,156 +77,223 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('getSpk') }}",
+                    url: "{{ route('pasang-baru.get') }}",
                     dataSrc: 'data'
                 },
                 scrollX: true,
                 scrollCollapse: true,
-                autoWidth: false,
                 columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         data: null,
-                        render: (data, type, row, meta) => meta.row + 1
+                        render: function(data, type, row) {
+                            return '<a href="/pasang-baru/get/edit/' + btoa(row.id) + '" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>';
+                        },
+                        orderable: false,
+                        searchable: false
                     },
                     {
-                        data: 'PO'
+                        data: 'po'
                     },
                     {
-                        data: 'SO'
+                        data: 'so'
                     },
                     {
-                        data: 'SPK'
+                        data: 'spk'
                     },
                     {
-                        data: 'Kode'
+                        data: 'kode'
                     },
                     {
-                        data: 'Nama'
+                        data: 'nama'
                     },
                     {
-                        data: 'DC'
+                        data: 'dc'
                     },
                     {
-                        data: 'IDM'
+                        data: 'idm'
                     },
                     {
-                        data: 'Sub'
+                        data: 'subkon'
                     },
                     {
-                        data: 'KF-15'
+                        data: 'kf_15'
                     },
                     {
-                        data: 'KF-20'
+                        data: 'kf_20'
                     },
                     {
-                        data: 'KF-23'
+                        data: 'kf_23'
                     },
                     {
-                        data: 'KF-26'
+                        data: 'kf_26'
                     },
                     {
-                        data: 'KF-34'
+                        data: 'kf_34'
                     },
                     {
-                        data: 'KF-50'
+                        data: 'kf_50'
                     },
                     {
-                        data: 'KF-70'
+                        data: 'kf_70'
                     },
                     {
-                        data: 'KF-100'
+                        data: 'kf_100'
                     },
                     {
-                        data: 'KF-120'
+                        data: 'kf_120'
                     },
                     {
-                        data: 'TGL PO'
+                        data: 'tgl_po'
                     },
                     {
-                        data: 'Start'
+                        data: 'start'
                     },
                     {
-                        data: 'Due'
+                        data: 'due'
                     },
                     {
-                        data: 'SJ'
+                        data: 'sj'
                     },
                     {
-                        data: 'BAP'
+                        data: 'bap'
                     },
                     {
-                        data: 'Tipe'
+                        data: 'tipe'
                     },
                     {
-                        data: 'Lok'
+                        data: 'lok'
                     },
                     {
-                        data: 'Ket'
+                        data: 'ket'
                     },
                     {
                         data: 'cabut'
                     },
                     {
-                        data: 'harga sewa'
+                        data: 'harga_sewa'
+                    },
+                    {
+                        data: 'created_at',
+                        render: function(data) {
+                            return data.split('T')[0].split('-').reverse().join('/');
+                        }
                     }
                 ],
-
                 columnDefs: [{
                         targets: 0,
-                        width: "50px"
+                        width: 50,
+                        orderable: false,
+                        searchable: false
                     }, // #
                     {
                         targets: 1,
-                        width: "100px"
-                    }, // PO
-                    {
-                        targets: 2,
-                        width: "100px"
-                    }, // SO
-                    {
-                        targets: 3,
-                        width: "80px"
-                    }, // SPK
+                        width: 100,
+                        orderable: false,
+                        searchable: false
+                    }, // Action
                     {
                         targets: 4,
-                        width: "90px"
-                    }, // Kode
-                    {
-                        targets: 5,
-                        width: "200px"
-                    }, // Nama
+                        width: 200
+                    },
                     {
                         targets: 6,
-                        width: "70px"
-                    }, // DC
+                        width: 200
+                    },
                     {
                         targets: 7,
-                        width: "90px"
-                    }, // IDM
+                        width: 100
+                    },
                     {
                         targets: 8,
-                        width: "150px"
-                    }, // Sub
+                        width: 100
+                    },
                     {
                         targets: 9,
-                        width: "70px"
-                    }, // KF-15
+                        width: 50
+                    },
+                    {
+                        targets: 10,
+                        width: 50
+                    },
+                    {
+                        targets: 11,
+                        width: 50
+                    },
+                    {
+                        targets: 12,
+                        width: 50
+                    },
+                    {
+                        targets: 13,
+                        width: 50
+                    },
                     {
                         targets: 14,
-                        width: "70px"
-                    }, // KF-50
+                        width: 50
+                    },
+                    {
+                        targets: 15,
+                        width: 50
+                    },
+                    {
+                        targets: 16,
+                        width: 80
+                    },
+                    {
+                        targets: 17,
+                        width: 80
+                    },
                     {
                         targets: 18,
-                        width: "120px"
-                    }, // TGL PO
+                        width: 100
+                    },
+                    {
+                        targets: 19,
+                        width: 100
+                    },
+                    {
+                        targets: 20,
+                        width: 100
+                    },
+                    {
+                        targets: 21,
+                        width: 100
+                    },
+                    {
+                        targets: 22,
+                        width: 150
+                    },
+                    {
+                        targets: 23,
+                        width: 150
+                    },
                     {
                         targets: 24,
-                        width: "250px"
-                    }, // Ket
+                        width: 150
+                    },
+                    {
+                        targets: 25,
+                        width: 100
+                    },
+                    {
+                        targets: 26,
+                        width: 350
+                    },
                     {
                         targets: 27,
-                        width: "120px"
-                    } // Harga Sewa
+                        width: 100
+                    },
+                    {
+                        targets: 28,
+                        width: 100
+                    },
                 ]
+
             });
         });
     </script>

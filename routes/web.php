@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InputSpkController;
 use App\Http\Controllers\PasangBaruController;
 
 /*
@@ -31,9 +32,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::middleware(['permission:input_spk_access'])->prefix('input-spk')->group(function () {
+        Route::get('/', [InputSpkController::class, 'index'])->name('input-spk.index');
+        // Route::get('/spk-search', [InputSpkController::class, 'searchSpk'])->name('search-spk');
+        Route::get('/search-spk', [InputSpkController::class, 'searchSpk'])->name('searchSpk');
+        Route::get('/verify-spk', [InputSpkController::class, 'getSpk'])->name('verifySpk');
+        Route::post('/input-spk/store', [InputSpkController::class, 'store'])->name('spkStore');
+    });
+
+
     Route::middleware(['permission:pasang_baru_access'])->prefix('pasang-baru')->group(function () {
         Route::get('/', [PasangBaruController::class, 'index'])->name('pasang-baru.index');
-        Route::get('/get-spk', [PasangBaruController::class, 'getSpk'])->name('getSpk');
+        Route::get('/get', [PasangBaruController::class, 'getPO'])->name('pasang-baru.get');
+        Route::get('/get/edit/{id}', [PasangBaruController::class, 'getPOById'])->name('pasang-baru.getById');
+        Route::put('/get/update/{id}', [PasangBaruController::class, 'update'])->name('pasang-baru.update');
     });
     Route::middleware(['permission:roles_access'])->prefix('roles')->group(function () {
         Route::get('/', [RolePermissionController::class, 'indexRoles'])->name('roles.index');
