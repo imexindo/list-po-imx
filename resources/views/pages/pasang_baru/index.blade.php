@@ -31,33 +31,21 @@
                                 <th>#</th>
                                 <th>Action</th>
                                 <th>No Seri</th>
-                                <th>PO</th>
-                                <th>SO</th>
                                 <th>SPK</th>
-                                <th>Kode</th>
-                                <th>Nama</th>
-                                <th>DC</th>
-                                <th>IDM</th>
-                                <th>Sub</th>
-                                <th>KF-15</th>
-                                <th>KF-20</th>
-                                <th>KF-23</th>
-                                <th>KF-26</th>
-                                <th>KF-34</th>
-                                <th>KF-50</th>
-                                <th>KF-70</th>
-                                <th>KF-100</th>
-                                <th>KF-120</th>
-                                <th>TGL PO</th>
-                                <th>Start</th>
-                                <th>Due</th>
-                                <th>SJ</th>
-                                <th>BAP</th>
-                                <th>Tipe</th>
-                                <th>Lok</th>
-                                <th>Ket</th>
-                                <th>Cabut</th>
-                                <th>Harga Sewa</th>
+                                <th>Tgl SPK</th>
+                                <th>Tgl Kirim Unit</th>
+                                <th>No SJ</th>
+                                <th>Tgl SJ Diterima</th>
+                                <th>Tgl Pasang</th>
+                                <th>Tgl BAP</th>
+                                <th>Proses SPK</th>
+                                <th>Proses BAP</th>
+                                <th>Tgl Dok Diterima</th>
+                                <th>Tgl Info Cancel</th>
+                                <th>No Goods Isuued</th>
+                                <th>No Kapitalisasi</th>
+                                <th>Keterangan</th>
+                                <th>Ket SAP</th>
                                 <th>Created</th>
                             </tr>
                         </thead>
@@ -92,7 +80,8 @@
                     {
                         data: null,
                         render: function(data, type, row) {
-                            return '<a href="/pasang-baru/get/edit/' + btoa(row.id) + '" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>';
+                            return '<a href="/pasang-baru/get/edit/' + btoa(row.id) +
+                                '" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>';
                         },
                         orderable: false,
                         searchable: false
@@ -101,85 +90,81 @@
                         data: 'no_seri'
                     },
                     {
-                        data: 'po'
-                    },
-                    {
-                        data: 'so'
-                    },
-                    {
                         data: 'spk'
                     },
                     {
-                        data: 'kode'
+                        data: 'tgl_spk'
                     },
                     {
-                        data: 'nama'
-                    },
-                    {
-                        data: 'dc'
-                    },
-                    {
-                        data: 'idm'
-                    },
-                    {
-                        data: 'subkon'
-                    },
-                    {
-                        data: 'kf_15'
-                    },
-                    {
-                        data: 'kf_20'
-                    },
-                    {
-                        data: 'kf_23'
-                    },
-                    {
-                        data: 'kf_26'
-                    },
-                    {
-                        data: 'kf_34'
-                    },
-                    {
-                        data: 'kf_50'
-                    },
-                    {
-                        data: 'kf_70'
-                    },
-                    {
-                        data: 'kf_100'
-                    },
-                    {
-                        data: 'kf_120'
-                    },
-                    {
-                        data: 'tgl_po'
-                    },
-                    {
-                        data: 'start'
-                    },
-                    {
-                        data: 'due'
+                        data: 'tgl_kirim_unit'
                     },
                     {
                         data: 'sj'
                     },
                     {
-                        data: 'bap'
+                        data: 'tgl_dok_sj'
                     },
                     {
-                        data: 'tipe'
+                        data: 'tgl_pasang'
                     },
                     {
-                        data: 'lok'
+                        data: 'tgl_bap'
+                    },
+                    {
+                        data: 'l_spk',
+                        render: function(data, type, row) {
+                            let badgeClass = 'secondary';
+                            let text = '<i class="fa fa-spinner"></i> -';
+
+                            if (data == 0) {
+                                badgeClass = 'secondary';
+                                text = '<i class="fa fa-spinner"></i> Blank';
+                            } else if (data == 1) {
+                                badgeClass = 'success';
+                                text = '<i class="fa fa-check-circle"></i> Accepted';
+                            } else if (data == 2) {
+                                badgeClass = 'danger';
+                                text = '<i class="fa fa-close"></i> Canceled';
+                            }
+                            return `<span class="badge bg-${badgeClass}">${text}</span>`;
+                        }
+                    },
+                    {
+                        data: 'l_bap',
+                        render: function(data, type, row) {
+                            let badgeClass = 'secondary';
+                            let text = '<i class="fa fa-spinner"></i> -';
+
+                            if (data == 0) {
+                                badgeClass = 'secondary';
+                                text = '<i class="fa fa-spinner"></i> Blank';
+                            } else if (data == 1) {
+                                badgeClass = 'success';
+                                text = '<i class="fa fa-check"></i> Accepted';
+                            } else if (data == 2) {
+                                badgeClass = 'danger';
+                                text = '<i class="fa fa-close"></i> Canceled';
+                            }
+                            return `<span class="badge bg-${badgeClass}">${text}</span>`;
+                        }
+                    },
+                    {
+                        data: 'tgl_dok_terima'
+                    },
+                    {
+                        data: 'no_info_cancel'
+                    },
+                    {
+                        data: 'no_goods_issued'
+                    },
+                    {
+                        data: 'no_kapitalisasi'
+                    },
+                    {
+                        data: 'keterangan'
                     },
                     {
                         data: 'ket'
-                    },
-                    {
-                        data: 'cabut'
-                    },
-                    {
-                        data: 'harga_sewa'
                     },
                     {
                         data: 'created_at',
@@ -193,20 +178,28 @@
                         width: 50,
                         orderable: false,
                         searchable: false
-                    }, // #
+                    },
                     {
                         targets: 1,
                         width: 100,
                         orderable: false,
                         searchable: false
-                    }, // Action
+                    },
                     {
                         targets: 2,
                         width: 100
-                    }, // No Resi
+                    },
+                    {
+                        targets: 3,
+                        width: 300
+                    },
+                    {
+                        targets: 4,
+                        width: 100
+                    },
                     {
                         targets: 5,
-                        width: 200
+                        width: 100
                     },
                     {
                         targets: 6,
@@ -214,7 +207,7 @@
                     },
                     {
                         targets: 7,
-                        width: 200
+                        width: 150
                     },
                     {
                         targets: 8,
@@ -222,87 +215,67 @@
                     },
                     {
                         targets: 9,
-                        width: 50
+                        width: 100
                     },
                     {
                         targets: 10,
-                        width: 50
-                    },
+                        width: 100
+                    }, // Proses SPK
                     {
                         targets: 11,
-                        width: 50
-                    },
+                        width: 150
+                    }, // Proses BAP
                     {
                         targets: 12,
-                        width: 50
+                        width: 150
                     },
                     {
                         targets: 13,
-                        width: 50
+                        width: 150
                     },
                     {
                         targets: 14,
-                        width: 50
+                        width: 150
                     },
                     {
                         targets: 15,
-                        width: 50
+                        width: 150
                     },
                     {
                         targets: 16,
-                        width: 80
+                        width: 400
                     },
                     {
                         targets: 17,
-                        width: 80
+                        width: 400
                     },
                     {
                         targets: 18,
                         width: 100
                     },
-                    {
-                        targets: 19,
-                        width: 100
-                    },
-                    {
-                        targets: 20,
-                        width: 100
-                    },
-                    {
-                        targets: 21,
-                        width: 100
-                    },
-                    {
-                        targets: 22,
-                        width: 150
-                    },
-                    {
-                        targets: 23,
-                        width: 150
-                    },
-                    {
-                        targets: 24,
-                        width: 150
-                    },
-                    {
-                        targets: 25,
-                        width: 100
-                    },
-                    {
-                        targets: 27,
-                        width: 350
-                    },
-                    {
-                        targets: 28,
-                        width: 100
-                    },
-                    {
-                        targets: 29,
-                        width: 100
-                    },
-                ]
+                ],
+                initComplete: function() {
+                    this.api().columns([10, 11]).every(function() {
+                        var column = this;
+                        var select = $(`
+                            <select class="form-control">
+                                <option value="">All</option>
+                                <option value="0">Blank</option>
+                                <option value="1">Accepted</option>
+                                <option value="2">Canceled</option>
+                            </select>
+                        `)
+                            .appendTo($(column.header()).empty())
+                            .on('change', function() {
+                                var val = $(this).val();
+                                column.search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                            });
+                    });
+                }
 
             });
+
         });
     </script>
 @endsection

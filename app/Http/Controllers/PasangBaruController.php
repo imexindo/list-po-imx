@@ -44,7 +44,7 @@ class PasangBaruController extends Controller
             $decryptId = base64_decode($id);
 
             $getPo = PO::with(['category_by_menu:id,name'])->find($decryptId);
-            
+
             return view('pages.edit.index', compact('getPo'));
 
         } catch (\Exception $e) {
@@ -54,6 +54,8 @@ class PasangBaruController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        // dd($request->all());
 
         $decryptId = decrypt($id);
 
@@ -87,9 +89,24 @@ class PasangBaruController extends Controller
                 'lok'        => $request->lok,
                 'harga_sewa' => $request->harga_sewa,
                 'ket'        => $request->ket,
+                'l_spk'      => $request->l_spk,
+                'l_bap'      => $request->l_bap,
+                'tgl_spk'      => $request->tgl_spk,
+                'tgl_kirim_unit'      => $request->tgl_kirim_unit,
+                'tgl_dok_sj'      => $request->tgl_dok_sj,
+                'tgl_pasang'      => $request->tgl_pasang,
+                'tgl_bap'      => $request->tgl_bap,
+                'tgl_dok_terima'      => $request->tgl_dok_terima,
+                'no_info_cancel'      => $request->no_info_cancel,
+                'no_goods_issued'      => $request->no_goods_issued,
+                'no_kapitalisasi'      => $request->no_kapitalisasi,
+                'keterangan'      => $request->keterangan,
+                'bulan_po'      => $request->bulan_po,
             ]);
 
             return redirect()->back()->with('success', 'Data berhasil diperbarui!');
+
+            
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal update data: ' . $e->getMessage());
         }

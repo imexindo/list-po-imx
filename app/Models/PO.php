@@ -42,7 +42,19 @@ class PO extends Model
         'harga_sewa',
         'ket',
         'l_spk',
-        'l_bap'
+        'l_bap',
+        'bulan_po',
+        'tgl_spk',
+        'tgl_kirim_unit',
+        'tgl_dok_sj',
+        'tgl_pasang',
+        'tgl_bap',
+        'tgl_dok_terima',
+        'no_info_cancel',
+        'no_goods_issued',
+        'no_kapitalisasi',
+        'bulan_po',
+        'keterangan'
     ];
 
     public function category_by_menu()

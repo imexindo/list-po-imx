@@ -252,7 +252,10 @@
                                         <div class="form-group">
                                             <label for="category_id">Kategori</label>
                                             <select class="form-control" name="category_id" id="category_id" required>
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ null }}">Pilih</option>
+                                                @foreach ($category as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -260,48 +263,42 @@
                                         <label for="spk">SPK</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_spk"
-                                                    id="spk0" value="0" checked>
-                                                Blank
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_spk" id="spk0" value="0" checked>
+                                            Blank
+                                          </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_spk"
-                                                    id="spk1" value="1">
-                                                Checked
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_spk" id="spk1" value="1">
+                                            Accepted
+                                          </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_spk"
-                                                    id="spk2" value="2">
-                                                Close
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_spk" id="spk2" value="2">
+                                            Canceled
+                                          </label>
                                         </div>
                                     </div>
                                     <div class="col-4 mt-4">
                                         <label for="bap">BAP</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_bap"
-                                                    id="bap0" value="0" checked>
-                                                Blank
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_bap" id="bap0" value="0" checked>
+                                            Blank
+                                          </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_bap"
-                                                    id="bap1" value="1">
-                                                Checked
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_bap" id="bap1" value="1">
+                                            Accepted
+                                          </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="l_bap"
-                                                    id="bap2" value="2">
-                                                Close
-                                            </label>
+                                            <input type="radio" class="form-check-input" name="l_bap" id="bap2" value="2">
+                                            Canceled
+                                          </label>
                                         </div>
                                     </div>
                                 </div>
@@ -436,7 +433,7 @@
                         $("#lok").val(data.Lok || "");
                         $("#harga_sewa").val(data["harga sewa"] || 0);
                         $("#ket").val(data.Ket || "");
-                        $("#bulan-po").val(data["Bln PO"] || 0);
+                        $("#bulan-po").val(data["Bln PO"] || "");
 
                         $("#createModal").modal("show");
                     },

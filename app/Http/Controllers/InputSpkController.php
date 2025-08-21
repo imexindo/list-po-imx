@@ -102,6 +102,22 @@ class InputSpkController extends Controller
             $po->lok = $validated['lok'];
             $po->harga_sewa = $validated['harga_sewa'];
             $po->ket = $validated['ket'];
+            $bulan = $request->bulan_po;
+            $namaBulan = [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember'
+            ];
+            $po->bulan_po = $namaBulan[$bulan] ?? null;
 
             foreach ($mapping as $reqKey => $dbKey) {
                 if ($request->has($reqKey)) {

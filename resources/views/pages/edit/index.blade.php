@@ -44,14 +44,14 @@
                                 <div class="form-group">
                                     <label for="po">PO</label>
                                     <input type="text" class="form-control" name="po" id="po"
-                                        aria-describedby="helpId" placeholder="Input PO" value="{{ $getPo->po }}" readonly>
+                                        aria-describedby="helpId" placeholder="Input PO" value="{{ $getPo->po }}">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="so">SO</label>
                                     <input type="text" class="form-control" name="so" id="so"
-                                        aria-describedby="helpId" placeholder="Input SO" value="{{ $getPo->so }}" readonly>
+                                        aria-describedby="helpId" placeholder="Input SO" value="{{ $getPo->so }}">
                                 </div>
                             </div>
                             <div class="col-3">
@@ -86,14 +86,14 @@
                                 <div class="form-group">
                                     <label for="dc">DC</label>
                                     <input type="text" class="form-control" name="dc" id="dc"
-                                        aria-describedby="helpId" placeholder="Input DC" value="{{ $getPo->dc }}" readonly>
+                                        aria-describedby="helpId" placeholder="Input DC" value="{{ $getPo->dc }}">
                                 </div>
                             </div>
                             <div class="col-4 mt-3">
                                 <div class="form-group">
                                     <label for="idm">IDM</label>
                                     <input type="text" class="form-control" name="idm" id="idm"
-                                        aria-describedby="helpId" placeholder="Input IDM" value="{{ $getPo->idm }}" readonly>
+                                        aria-describedby="helpId" placeholder="Input IDM" value="{{ $getPo->idm }}">
                                 </div>
                             </div>
                             <div class="col-4 mt-3">
@@ -237,44 +237,119 @@
                                 <label for="spk">SPK</label><br>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_spk" id="spk0" value="0" checked>
-                                    Blank
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_spk" id="spk0" value="0"
+                                            {{ old('l_spk', $getPo->l_spk) == 0 ? 'checked' : '' }}>
+                                        Blank
+                                    </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_spk" id="spk1" value="1">
-                                    Checked
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_spk" id="spk1" value="1"
+                                            {{ old('l_spk', $getPo->l_spk) == 1 ? 'checked' : '' }}>
+                                        Accepted
+                                    </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_spk" id="spk2" value="2">
-                                    Close
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_spk" id="spk2" value="2"
+                                            {{ old('l_spk', $getPo->l_spk) == 2 ? 'checked' : '' }}>
+                                        Canceled
+                                    </label>
                                 </div>
                             </div>
+                            
                             <div class="col-4 mt-4">
                                 <label for="bap">BAP</label><br>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_bap" id="bap0" value="0" checked>
-                                    Blank
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_bap" id="bap0" value="0"
+                                            {{ old('l_bap', $getPo->l_bap) == 0 ? 'checked' : '' }}>
+                                        Blank
+                                    </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_bap" id="bap1" value="1">
-                                    Checked
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_bap" id="bap1" value="1"
+                                            {{ old('l_bap', $getPo->l_bap) == 1 ? 'checked' : '' }}>
+                                        Accepted
+                                    </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="l_bap" id="bap2" value="2">
-                                    Close
-                                  </label>
+                                        <input type="radio" class="form-check-input" name="l_bap" id="bap2" value="2"
+                                            {{ old('l_bap', $getPo->l_bap) == 2 ? 'checked' : '' }}>
+                                        Canceled
+                                    </label>
                                 </div>
                             </div>
+
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_spk">Tgl Spk</label>
+                                  <input type="date" class="form-control" name="tgl_spk" id="tgl_spk" value="{{ $getPo->tgl_spk }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_kirim_unit">Tgl Kirim Unit</label>
+                                  <input type="date" class="form-control" name="tgl_kirim_unit" id="tgl_kirim_unit" value="{{ $getPo->tgl_kirim_unit }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_dok_sj">Tgl SJ diterima</label>
+                                  <input type="date" class="form-control" name="tgl_dok_sj" id="tgl_dok_sj" value="{{ $getPo->tgl_dok_sj }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_pasang">Tgl Pasang</label>
+                                  <input type="date" class="form-control" name="tgl_pasang" id="tgl_pasang" value="{{ $getPo->tgl_pasang }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_bap">Tgl BAP</label>
+                                  <input type="date" class="form-control" name="tgl_bap" id="tgl_bap" value="{{ $getPo->tgl_bap }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="tgl_dok_terima">Tgl dok terima</label>
+                                  <input type="date" class="form-control" name="tgl_dok_terima" id="tgl_dok_terima" value="{{ $getPo->tgl_dok_terima }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="no_info_cancel">No Info Cancel</label>
+                                  <input type="text" class="form-control" name="no_info_cancel" id="no_info_cancel"  value="{{ $getPo->no_info_cancel }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="no_goods_issued">No Goods Issue</label>
+                                  <input type="text" class="form-control" name="no_goods_issued" id="no_goods_issued" value="{{ $getPo->no_goods_issued }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="no_kapitalisasi">No Kapitalisasi</label>
+                                  <input type="text" class="form-control" name="no_kapitalisasi" id="no_kapitalisasi" value="{{ $getPo->no_kapitalisasi }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                  <label for="bulan_po">Bulan PO</label>
+                                  <input type="text" class="form-control" name="bulan_po" id="bulan_po" value="{{ $getPo->bulan_po }}" >
+                                </div>
+                            </div>
+                            <div class="col-6 mt-3">
+                                <div class="form-group">
+                                  <label for="keterangan">Keterangan</label>
+                                  <input type="text" class="form-control" name="keterangan" id="keterangan" value="{{ $getPo->keterangan }}">
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="card-footer">
