@@ -30,6 +30,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Action</th>
+                                <th>No Seri</th>
                                 <th>PO</th>
                                 <th>SO</th>
                                 <th>SPK</th>
@@ -95,6 +96,9 @@
                         },
                         orderable: false,
                         searchable: false
+                    },
+                    {
+                        data: 'no_seri'
                     },
                     {
                         data: 'po'
@@ -197,16 +201,20 @@
                         searchable: false
                     }, // Action
                     {
-                        targets: 4,
+                        targets: 2,
+                        width: 100
+                    }, // No Resi
+                    {
+                        targets: 5,
                         width: 200
                     },
                     {
                         targets: 6,
-                        width: 200
+                        width: 100
                     },
                     {
                         targets: 7,
-                        width: 100
+                        width: 200
                     },
                     {
                         targets: 8,
@@ -281,15 +289,15 @@
                         width: 100
                     },
                     {
-                        targets: 26,
+                        targets: 27,
                         width: 350
                     },
                     {
-                        targets: 27,
+                        targets: 28,
                         width: 100
                     },
                     {
-                        targets: 28,
+                        targets: 29,
                         width: 100
                     },
                 ]

@@ -225,6 +225,56 @@
                                         value="{{ $getPo->ket }}">
                                 </div>
                             </div>
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="category_id">Kategori</label>
+                                    <select class="form-control" name="category_id" id="category_id" required>
+                                        <option value="{{ $getPo->category_id }}">{{ $getPo->category_by_menu->name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mt-4">
+                                <label for="spk">SPK</label><br>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_spk" id="spk0" value="0" checked>
+                                    Blank
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_spk" id="spk1" value="1">
+                                    Checked
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_spk" id="spk2" value="2">
+                                    Close
+                                  </label>
+                                </div>
+                            </div>
+                            <div class="col-4 mt-4">
+                                <label for="bap">BAP</label><br>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_bap" id="bap0" value="0" checked>
+                                    Blank
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_bap" id="bap1" value="1">
+                                    Checked
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="l_bap" id="bap2" value="2">
+                                    Close
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\PO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -18,7 +19,9 @@ class PasangBaruController extends Controller
 
     public function getPO()
     {
-        $query = PO::query()->orderBy('created_at', 'desc');
+        $query = PO::query()
+            ->where('category_id', 1)
+            ->orderBy('created_at', 'desc');
 
         return DataTables::of($query)
             ->addIndexColumn()
@@ -39,9 +42,11 @@ class PasangBaruController extends Controller
     {
         try {
             $decryptId = base64_decode($id);
-            $getPo = PO::find($decryptId);
 
+            $getPo = PO::with(['category_by_menu:id,name'])->find($decryptId);
+            
             return view('pages.edit.index', compact('getPo'));
+
         } catch (\Exception $e) {
             abort(500, $e->getMessage());
         }

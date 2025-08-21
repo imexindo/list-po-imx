@@ -101,25 +101,32 @@
                                                 aria-describedby="helpId" placeholder="Input Nama">
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-3">
+                                    <div class="col-3 mt-3">
                                         <div class="form-group">
                                             <label for="dc">DC</label>
                                             <input type="text" class="form-control" name="dc" id="dc"
                                                 aria-describedby="helpId" placeholder="Input DC">
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-3">
+                                    <div class="col-3 mt-3">
                                         <div class="form-group">
                                             <label for="idm">IDM</label>
                                             <input type="text" class="form-control" name="idm" id="idm"
                                                 aria-describedby="helpId" placeholder="Input IDM">
                                         </div>
                                     </div>
-                                    <div class="col-4 mt-3">
+                                    <div class="col-3 mt-3">
                                         <div class="form-group">
                                             <label for="subkon">Subkon</label>
                                             <input type="text" class="form-control" name="subkon" id="subkon"
                                                 aria-describedby="helpId" placeholder="Input Subkon">
+                                        </div>
+                                    </div>
+                                    <div class="col-3 mt-3">
+                                        <div class="form-group">
+                                            <label for="Bulan Po">Bulan PO</label>
+                                            <input type="text" class="form-control" name="bulan_po" id="bulan-po"
+                                                aria-describedby="helpId" placeholder="Bulan PO">
                                         </div>
                                     </div>
                                     <div class="col-3 mt-3">
@@ -241,6 +248,62 @@
                                                 aria-describedby="helpId" placeholder="Input Keterangan">
                                         </div>
                                     </div>
+                                    <div class="col-4 mt-3">
+                                        <div class="form-group">
+                                            <label for="category_id">Kategori</label>
+                                            <select class="form-control" name="category_id" id="category_id" required>
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 mt-4">
+                                        <label for="spk">SPK</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk0" value="0" checked>
+                                                Blank
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk1" value="1">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk2" value="2">
+                                                Close
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 mt-4">
+                                        <label for="bap">BAP</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap0" value="0" checked>
+                                                Blank
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap1" value="1">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap2" value="2">
+                                                Close
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -262,7 +325,7 @@
             $("#spkInput").on("keyup", function() {
                 let search = $(this).val().trim();
 
-                if (search.length < 2) {
+                if (search.length < 1) {
                     $("#spkResults").html("");
                     return;
                 }
@@ -373,6 +436,7 @@
                         $("#lok").val(data.Lok || "");
                         $("#harga_sewa").val(data["harga sewa"] || 0);
                         $("#ket").val(data.Ket || "");
+                        $("#bulan-po").val(data["Bln PO"] || 0);
 
                         $("#createModal").modal("show");
                     },
@@ -400,10 +464,13 @@
                         $('#createModal').modal('hide');
                     },
                     error: function(err) {
-                        if (err.responseJSON && err.responseJSON.errors && err.responseJSON.errors.spk) {
-                            Swal.fire('Error', 'Gagal simpan data: ' + err.responseJSON.errors.spk[0], 'error');
+                        if (err.responseJSON && err.responseJSON.errors && err.responseJSON
+                            .errors.spk) {
+                            Swal.fire('Error', 'Gagal simpan data: ' + err.responseJSON.errors
+                                .spk[0], 'error');
                         } else {
-                            Swal.fire('Error', 'Gagal simpan data: ' + err.responseText, 'error');
+                            Swal.fire('Error', 'Gagal simpan data: ' + err.responseText,
+                                'error');
                         }
                     }
                 });

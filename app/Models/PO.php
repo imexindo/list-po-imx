@@ -14,6 +14,7 @@ class PO extends Model
     protected $fillable = [
         'no_seri',
         'spk',
+        'category_id',
         'po',
         'so',
         'tgl_po',
@@ -39,6 +40,13 @@ class PO extends Model
         'cabut',
         'lok',
         'harga_sewa',
-        'ket'
+        'ket',
+        'l_spk',
+        'l_bap'
     ];
+
+    public function category_by_menu()
+    {
+        return $this->belongsTo(Menu::class, 'category_id', 'id');
+    }
 }

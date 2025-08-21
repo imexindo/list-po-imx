@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\PO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class InputSpkController extends Controller
 {
     public function index()
     {
-        return view('pages.input_spk.index');
+        $category = Menu::get();
+        return view('pages.input_spk.index', compact('category'));
     }
 
     public function searchSpk(Request $request)
@@ -27,7 +30,6 @@ class InputSpkController extends Controller
     public function getSpk(Request $request)
     {
 
-
         $search = $request->query('search');
 
         $response = Http::get(env('SAP_API') . '/api/verify-spk', [
@@ -40,6 +42,7 @@ class InputSpkController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'spk' => 'required|unique:t_po',
             'po' => 'nullable',
@@ -59,6 +62,7 @@ class InputSpkController extends Controller
             'lok' => 'nullable',
             'harga_sewa' => 'nullable|numeric',
             'ket' => 'nullable',
+            'category_id' => 'required',
         ]);
 
         try {
@@ -77,24 +81,27 @@ class InputSpkController extends Controller
 
             $po = new PO();
 
-            $po->spk = $request->spk;
-            $po->po = $request->po;
-            $po->so = $request->so;
-            $po->tgl_po = $request->tgl_po;
-            $po->tipe = $request->tipe;
-            $po->kode = $request->kode;
-            $po->nama = $request->nama;
-            $po->dc = $request->dc;
-            $po->idm = $request->idm;
-            $po->subkon = $request->subkon;
-            $po->bap = $request->bap;
-            $po->start = $request->start;
-            $po->due = $request->due;
-            $po->sj = $request->sj;
-            $po->cabut = $request->cabut;
-            $po->lok = $request->lok;
-            $po->harga_sewa = $request->harga_sewa;
-            $po->ket = $request->ket;
+            $po->spk = $validated['spk'];
+            $po->category_id = $validated['category_id'];
+            $po->l_spk = $request->l_spk;
+            $po->l_bap = $request->l_bap;
+            $po->po = $validated['po'];
+            $po->so = $validated['so'];
+            $po->tgl_po = $validated['tgl_po'];
+            $po->tipe = $validated['tipe'];
+            $po->kode = $validated['kode'];
+            $po->nama = $validated['nama'];
+            $po->dc = $validated['dc'];
+            $po->idm = $validated['idm'];
+            $po->subkon = $validated['subkon'];
+            $po->bap = $validated['bap'];
+            $po->start = $validated['start'];
+            $po->due = $validated['due'];
+            $po->sj = $validated['sj'];
+            $po->cabut = $validated['cabut'];
+            $po->lok = $validated['lok'];
+            $po->harga_sewa = $validated['harga_sewa'];
+            $po->ket = $validated['ket'];
 
             foreach ($mapping as $reqKey => $dbKey) {
                 if ($request->has($reqKey)) {
@@ -104,10 +111,15 @@ class InputSpkController extends Controller
 
             $po->no_seri = $this->generateNoSeri();
 
-            $po->save();
+            if (!$po->save()) {
+                Log::error('Gagal menyimpan data PO', ['data' => $po]);
+                return redirect()->back()->with('error', 'Gagal menyimpan data.');
+            }
 
             return redirect()->back()->with('success', 'Data berhasil disimpan!');
+            
         } catch (\Throwable $th) {
+            Log::error('Error saat menyimpan data PO', ['error' => $th->getMessage()]);
             return redirect()->back()->with('error', 'Gagal menyimpan: ' . $th->getMessage());
         }
     }
