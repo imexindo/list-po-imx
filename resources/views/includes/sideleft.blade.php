@@ -28,6 +28,42 @@
         @endcan
     </li>
 
+    <li class="">
+        @can('dc_access')
+            <a href="{{ route('dc.index') }}">
+                <i class="fa fa-address-card" style="font-size:16px"></i>
+                <span data-key="t-dashboard">DC</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
+        @can('relokasi_access')
+            <a href="{{ route('relokasi.index') }}">
+                <i class="fa fa-share-alt" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Relokasi</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
+        @can('extSementara_access')
+            <a href="{{ route('extSementara.index') }}">
+                <i class="fa fa-share" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Exit Sementara</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
+        @can('putus_access')
+            <a href="{{ route('putus.index') }}">
+                <i class="fa fa-share" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Putus</span>
+            </a>
+        @endcan
+    </li>
+
 
     <li>
         @canany(['permissions_access', 'roles_access', 'users_access'])

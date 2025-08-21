@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
 use App\Models\PO;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
-class PasangBaruController extends Controller
+class RelokasiController extends Controller
 {
-    public function index()
-    {
-
-        return view('pages.pasang_baru.index');
+    public function index() {
+        return view('pages.relokasi.index');
     }
-
 
     public function getPO()
     {
         $query = PO::query()
-            ->where('category_id', 1)
+            ->where('category_id', 3)
             ->orderBy('created_at', 'desc');
 
         return DataTables::of($query)
@@ -45,7 +40,7 @@ class PasangBaruController extends Controller
 
             $getPo = PO::with(['category_by_menu:id,name'])->find($decryptId);
 
-            return view('pages.edit.index', compact('getPo'));
+            return view('pages.edit-relokasi.index', compact('getPo'));
 
         } catch (\Exception $e) {
             abort(500, $e->getMessage());

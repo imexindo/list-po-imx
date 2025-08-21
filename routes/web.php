@@ -6,8 +6,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DcController;
+use App\Http\Controllers\extSementaraController;
 use App\Http\Controllers\InputSpkController;
 use App\Http\Controllers\PasangBaruController;
+use App\Http\Controllers\PutusController;
+use App\Http\Controllers\RelokasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +51,38 @@ Route::middleware('auth')->group(function () {
         Route::get('/get/edit/{id}', [PasangBaruController::class, 'getPOById'])->name('pasang-baru.getById');
         Route::put('/get/update/{id}', [PasangBaruController::class, 'update'])->name('pasang-baru.update');
     });
+
+    Route::middleware(['permission:dc_access'])->prefix('dc')->group(function () {
+        Route::get('/', [DcController::class, 'index'])->name('dc.index');
+        Route::get('/get', [DcController::class, 'getPO'])->name('dc.get');
+        Route::get('/get/edit/{id}', [DcController::class, 'getPOById'])->name('dc.getById');
+        Route::put('/get/update/{id}', [DcController::class, 'update'])->name('dc.update');
+    });
+
+    Route::middleware(['permission:relokasi_access'])->prefix('relokasi')->group(function () {
+        Route::get('/', [RelokasiController::class, 'index'])->name('relokasi.index');
+        Route::get('/get', [RelokasiController::class, 'getPO'])->name('relokasi.get');
+        Route::get('/get/edit/{id}', [RelokasiController::class, 'getPOById'])->name('relokasi.getById');
+        Route::put('/get/update/{id}', [RelokasiController::class, 'update'])->name('relokasi.update');
+    });
+
+
+    Route::middleware(['permission:extSementara_access'])->prefix('extSementara')->group(function () {
+        Route::get('/', [extSementaraController::class, 'index'])->name('extSementara.index');
+        Route::get('/get', [extSementaraController::class, 'getPO'])->name('extSementara.get');
+        Route::get('/get/edit/{id}', [extSementaraController::class, 'getPOById'])->name('extSementara.getById');
+        Route::put('/get/update/{id}', [extSementaraController::class, 'update'])->name('extSementara.update');
+    });
+
+
+    Route::middleware(['permission:putus_access'])->prefix('putus')->group(function () {
+        Route::get('/', [PutusController::class, 'index'])->name('putus.index');
+        Route::get('/get', [PutusController::class, 'getPO'])->name('putus.get');
+        Route::get('/get/edit/{id}', [PutusController::class, 'getPOById'])->name('putus.getById');
+        Route::put('/get/update/{id}', [PutusController::class, 'update'])->name('putus.update');
+    });
+
+
     Route::middleware(['permission:roles_access'])->prefix('roles')->group(function () {
         Route::get('/', [RolePermissionController::class, 'indexRoles'])->name('roles.index');
         Route::post('/store', [RolePermissionController::class, 'storeRole'])->name('roles.store');

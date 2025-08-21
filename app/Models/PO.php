@@ -14,6 +14,7 @@ class PO extends Model
     protected $fillable = [
         'no_seri',
         'spk',
+        'spk_subkon',
         'category_id',
         'po',
         'so',
