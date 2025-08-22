@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-<title>RELOKASI SPK | IMX</title>
+<title>GESER | IMX</title>
 
 
 @section('content')
@@ -14,7 +14,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="/relokasi">Relokasi</a></li>
+                                <li class="breadcrumb-item"><a href="/geser">Geser</a></li>
                                 <li class="breadcrumb-item active">Edit SPK</li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <h5>Edit SPK</h5>
                 </div>
-                <form action="{{ route('relokasi.update', ['id' => encrypt($getPo->id)]) }}" method="POST">
+                <form action="{{ route('geser.update', ['id' => encrypt($getPo->id)]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -75,7 +75,14 @@
                                         aria-describedby="helpId" placeholder="Input Kode" value="{{ $getPo->kode }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-6 mt-3">
+                            <div class="col-3 mt-3">
+                                <div class="form-group">
+                                    <label for="spk_subkon">SPK Subkon</label>
+                                    <input type="text" class="form-control" name="spk_subkon" id="spk_subkon"
+                                        aria-describedby="helpId" placeholder="Input Spk Subkon" value="{{ $getPo->spk_subkon }}">
+                                </div>
+                            </div>
+                            <div class="col-3 mt-3">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input type="text" class="form-control" name="nama" id="nama"
@@ -353,7 +360,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/relokasi" class="btn btn-secondary" >Kembali</a>
+                        <a href="/geser" class="btn btn-secondary" >Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>

@@ -40,7 +40,7 @@ class PutusController extends Controller
 
             $getPo = PO::with(['category_by_menu:id,name'])->find($decryptId);
 
-            return view('pages.edit-extSementara.index', compact('getPo'));
+            return view('pages.edit-putus.index', compact('getPo'));
 
         } catch (\Exception $e) {
             abort(500, $e->getMessage());

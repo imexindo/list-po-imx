@@ -164,7 +164,10 @@
                         data: 'keterangan'
                     },
                     {
-                        data: 'ket'
+                        data: 'ket',
+                        render: function(data) {
+                            return data.length > 40 ? data.substring(0, 40) + '...' : data;
+                        }
                     },
                     {
                         data: 'created_at',

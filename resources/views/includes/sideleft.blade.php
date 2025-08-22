@@ -22,7 +22,7 @@
     <li class="">
         @can('pasang_baru_access')
             <a href="{{ route('pasang-baru.index') }}">
-                <i class="fa fa-calendar" style="font-size:16px"></i>
+                <i class="fa fa-calendar-check" style="font-size:16px"></i>
                 <span data-key="t-dashboard">Pasang Baru</span>
             </a>
         @endcan
@@ -31,7 +31,7 @@
     <li class="">
         @can('dc_access')
             <a href="{{ route('dc.index') }}">
-                <i class="fa fa-address-card" style="font-size:16px"></i>
+                <i class="fa fa-id-card" style="font-size:16px"></i>
                 <span data-key="t-dashboard">DC</span>
             </a>
         @endcan
@@ -40,7 +40,7 @@
     <li class="">
         @can('relokasi_access')
             <a href="{{ route('relokasi.index') }}">
-                <i class="fa fa-share-alt" style="font-size:16px"></i>
+                <i class="fa fa-folder-open" style="font-size:16px"></i>
                 <span data-key="t-dashboard">Relokasi</span>
             </a>
         @endcan
@@ -58,8 +58,17 @@
     <li class="">
         @can('putus_access')
             <a href="{{ route('putus.index') }}">
-                <i class="fa fa-share" style="font-size:16px"></i>
+                <i class="fa fa-file-text" style="font-size:16px"></i>
                 <span data-key="t-dashboard">Putus</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
+        @can('geser_access')
+            <a href="{{ route('geser.index') }}">
+                <i class="fa fa-calendar-plus" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Geser</span>
             </a>
         @endcan
     </li>

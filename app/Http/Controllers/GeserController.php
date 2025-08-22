@@ -6,16 +6,16 @@ use App\Models\PO;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class RelokasiController extends Controller
+class GeserController extends Controller
 {
     public function index() {
-        return view('pages.relokasi.index');
+        return view('pages.geser.index');
     }
 
     public function getPO()
     {
         $query = PO::query()
-            ->where('category_id', 3)
+            ->where('category_id', 6)
             ->orderBy('created_at', 'desc');
 
         return DataTables::of($query)
@@ -38,10 +38,9 @@ class RelokasiController extends Controller
         try {
             $decryptId = base64_decode($id);
 
-            $getPo = PO::with(['category_by_menu:id,name'])
-                ->find($decryptId);
+            $getPo = PO::with(['category_by_menu:id,name'])->find($decryptId);
 
-            return view('pages.edit-relokasi.index', compact('getPo'));
+            return view('pages.edit-geser.index', compact('getPo'));
 
         } catch (\Exception $e) {
             abort(500, $e->getMessage());
@@ -96,6 +95,7 @@ class RelokasiController extends Controller
                 'no_kapitalisasi'      => $request->no_kapitalisasi,
                 'keterangan'      => $request->keterangan,
                 'bulan_po'      => $request->bulan_po,
+                'spk_subkon'      => $request->spk_subkon,
             ]);
 
             return redirect()->back()->with('success', 'Data berhasil diperbarui!');

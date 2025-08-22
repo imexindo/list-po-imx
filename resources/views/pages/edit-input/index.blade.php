@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-<title>RELOKASI SPK | IMX</title>
+<title>INPUT SPK | IMX</title>
 
 
 @section('content')
@@ -14,7 +14,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="/relokasi">Relokasi</a></li>
+                                <li class="breadcrumb-item"><a href="/input-spk">Input SPK</a></li>
                                 <li class="breadcrumb-item active">Edit SPK</li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <h5>Edit SPK</h5>
                 </div>
-                <form action="{{ route('relokasi.update', ['id' => encrypt($getPo->id)]) }}" method="POST">
+                <form action="{{ route('input-spk.update', ['id' => encrypt($getPo->id)]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -353,7 +353,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/relokasi" class="btn btn-secondary" >Kembali</a>
+                        <a href="/input-spk" class="btn btn-secondary" >Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>

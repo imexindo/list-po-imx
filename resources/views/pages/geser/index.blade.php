@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-<title>Putus | IMX</title>
+<title>GESER | IMX</title>
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -14,8 +14,8 @@
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="/putus">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Putus</li>
+                                <li class="breadcrumb-item"><a href="/geser">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Geser</li>
                             </ol>
                         </div>
                     </div>
@@ -33,7 +33,8 @@
                                 <th>No Seri</th>
                                 <th>SPK</th>
                                 <th>Tgl SPK</th>
-                                <th>AC yg di Cabut</th>
+                                <th>AC yg di Geser</th>
+                                <th>Tgl BAP</th>
                                 <th>SPK</th>
                                 <th>BAP</th>
                                 <th>Tgl Dok Diterima</th>
@@ -57,7 +58,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('putus.get') }}",
+                    url: "{{ route('geser.get') }}",
                     dataSrc: 'data'
                 },
                 scrollX: true,
@@ -71,7 +72,7 @@
                     {
                         data: null,
                         render: function(data, type, row) {
-                            return '<a href="/putus/get/edit/' + btoa(row.id) +
+                            return '<a href="/geser/get/edit/' + btoa(row.id) +
                                 '" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Edit</a>';
                         },
                         orderable: false,
@@ -104,12 +105,15 @@
                             fields.forEach(function(field) {
                                 if (row[field] != 0 && row[field] != null) {
                                     html +=
-                                        `<span class="badge bg-success">${row[field]} UNIT ${field.toUpperCase()}</span> `;
+                                        `<span class="badge bg-info">${row[field]} UNIT ${field.toUpperCase()}</span> `;
                                 }
                             });
 
                             return html === '' ? '-' : html;
                         }
+                    },
+                    {
+                        data: 'tgl_bap'
                     },
                     {
                         data: 'l_spk',
@@ -198,6 +202,10 @@
                     },
                     {
                         targets: 9,
+                        width: 300
+                    },
+                    {
+                        targets: 10,
                         width: 300
                     }
                 ]

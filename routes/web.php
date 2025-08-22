@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DcController;
 use App\Http\Controllers\extSementaraController;
+use App\Http\Controllers\GeserController;
 use App\Http\Controllers\InputSpkController;
 use App\Http\Controllers\PasangBaruController;
 use App\Http\Controllers\PutusController;
@@ -29,7 +30,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('dashboard');
-
+Route::get('/dashboard/spk-by-category', [DashboardController::class, 'getPoByCategory'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('chartByCategory');
+Route::get('/dashboard/po-by-spk', [DashboardController::class, 'getPoBySpk'])->middleware(['auth', 'verified', 'permission:dashboard_access'])->name('getPoBySpk');
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,10 +40,13 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['permission:input_spk_access'])->prefix('input-spk')->group(function () {
         Route::get('/', [InputSpkController::class, 'index'])->name('input-spk.index');
+        Route::get('/get', [InputSpkController::class, 'getPO'])->name('input-spk.get');
         // Route::get('/spk-search', [InputSpkController::class, 'searchSpk'])->name('search-spk');
         Route::get('/search-spk', [InputSpkController::class, 'searchSpk'])->name('searchSpk');
         Route::get('/verify-spk', [InputSpkController::class, 'getSpk'])->name('verifySpk');
         Route::post('/input-spk/store', [InputSpkController::class, 'store'])->name('spkStore');
+        Route::get('/get/edit/{id}', [InputSpkController::class, 'getPOById'])->name('input-spk.getById');
+        Route::put('/get/update/{id}', [InputSpkController::class, 'update'])->name('input-spk.update');
     });
 
 
@@ -80,6 +85,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/get', [PutusController::class, 'getPO'])->name('putus.get');
         Route::get('/get/edit/{id}', [PutusController::class, 'getPOById'])->name('putus.getById');
         Route::put('/get/update/{id}', [PutusController::class, 'update'])->name('putus.update');
+    });
+
+    Route::middleware(['permission:geser_access'])->prefix('geser')->group(function () {
+        Route::get('/', [GeserController::class, 'index'])->name('geser.index');
+        Route::get('/get', [GeserController::class, 'getPO'])->name('geser.get');
+        Route::get('/get/edit/{id}', [GeserController::class, 'getPOById'])->name('geser.getById');
+        Route::put('/get/update/{id}', [GeserController::class, 'update'])->name('geser.update');
     });
 
 

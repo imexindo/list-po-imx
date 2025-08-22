@@ -2,39 +2,61 @@
 
 <title>INPUT SPK | IMX</title>
 
+<style>
+    #spkResults {
+        max-height: 250px;
+        overflow-y: auto;
+        border: 1px solid #dee2e6;
+        /* biar kayak dropdown */
+        border-radius: 0.25rem;
+    }
+</style>
 
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-8">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Input SPK</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end page title -->
-
             <div class="row">
                 <div class="col-10">
                     <div class="mb-3 position-relative">
                         <label for="spk_input" class="form-label">NO SPK</label>
-                        <input type="text" class="form-control" name="spk_input" id="spkInput"
-                            placeholder="Input no SPK" autocomplete="off">
-                        <div id="spkResults" class="list-group position-absolute w-100" style="z-index:1000;"></div>
+                        <input type="text" class="form-control" name="spk_input" id="spkInput" placeholder="Input no SPK"
+                            autocomplete="off">
+                        <div id="spkResults" class="list-group position-absolute w-100"
+                            style="z-index:1000; max-height:200px; overflow-y:auto;"></div>
                     </div>
+
                 </div>
                 <div class="col-2 mt-4">
                     <button type="button" class="btn btn-primary px-3 py-3 btn-search-spk">
                         <i class="fa fa-search"></i>
                     </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>HISTORY</h4>
+                    <span>Menampilkan 10 data terbaru</span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-striped table-inverse table-responsive" id="installation"
+                                style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Action</th>
+                                        <th>No Seri</th>
+                                        <th>SPK</th>
+                                        <th>Category</th>
+                                        <th>Created</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -263,42 +285,48 @@
                                         <label for="spk">SPK</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_spk" id="spk0" value="0" checked>
-                                            Blank
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk0" value="0" checked>
+                                                Blank
+                                            </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_spk" id="spk1" value="1">
-                                            Accepted
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk1" value="1">
+                                                Accepted
+                                            </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_spk" id="spk2" value="2">
-                                            Canceled
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_spk"
+                                                    id="spk2" value="2">
+                                                Canceled
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-4 mt-4">
                                         <label for="bap">BAP</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_bap" id="bap0" value="0" checked>
-                                            Blank
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap0" value="0" checked>
+                                                Blank
+                                            </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_bap" id="bap1" value="1">
-                                            Accepted
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap1" value="1">
+                                                Accepted
+                                            </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="l_bap" id="bap2" value="2">
-                                            Canceled
-                                          </label>
+                                                <input type="radio" class="form-check-input" name="l_bap"
+                                                    id="bap2" value="2">
+                                                Canceled
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -318,6 +346,91 @@
 
     <script>
         $(document).ready(function() {
+
+            $('#installation').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('input-spk.get') }}",
+                    dataSrc: 'data'
+                },
+                scrollX: true,
+                columns: [{
+                        data: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: null,
+                        render: function(data, type, row) {
+                            return `
+                            <a href="/input-spk/get/edit/${btoa(row.id)}" 
+                            class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil"></i> Edit
+                            </a>`;
+                        },
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'no_seri'
+                    },
+                    {
+                        data: 'spk',
+                        render: function(data) {
+                            if (data && data.length > 25) {
+                                return `
+                        <span title="${data}">
+                            ${data.substring(0, 25)}...
+                        </span>`;
+                            }
+                            return data ?? '';
+                        }
+                    },
+                    {
+                        data: 'category_by_menu.name',
+                        render: function(data) {
+                            return `<span class="badge bg-primary">${data}</span>`;
+                        }
+                    },
+                    {
+                        data: 'created_at',
+                        render: function(data) {
+                            const dateTime = data.split('T');
+                            const date = dateTime[0].split('-').reverse().join('/');
+                            const time = dateTime[1].split('.')[0];
+                            return `${date} ${time}`;
+                        }
+                    }
+                ],
+                columnDefs: [{
+                        targets: 0,
+                        width: 10
+                    },
+                    {
+                        targets: 1,
+                        width: 50
+                    },
+                    {
+                        targets: 2,
+                        width: 100
+                    },
+                    {
+                        targets: 3,
+                        width: 300
+                    },
+                    {
+                        targets: 4,
+                        width: "120px"
+                    },
+                    {
+                        targets: 5,
+                        width: "220px"
+                    }
+                ],
+            });
+
+
             // search
             $("#spkInput").on("keyup", function() {
                 let search = $(this).val().trim();
@@ -457,7 +570,9 @@
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(res) {
-                        Swal.fire('Success', 'Data berhasil disimpan!', 'success');
+                        Swal.fire('Success', 'Data berhasil disimpan!', 'success').then(() => {
+                            location.reload();
+                        });
                         $('#createModal').modal('hide');
                     },
                     error: function(err) {
