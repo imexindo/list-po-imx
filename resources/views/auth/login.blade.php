@@ -161,8 +161,6 @@
                                                 aria-label="Slide 1"></button>
                                             <button type="button" data-bs-target="#reviewcarouselIndicators"
                                                 data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                            <button type="button" data-bs-target="#reviewcarouselIndicators"
-                                                data-bs-slide-to="2" aria-label="Slide 3"></button>
                                         </div>
                                         <!-- end carouselIndicators -->
                                         <div class="carousel-inner">
@@ -180,15 +178,14 @@
                                                     <div class="mt-4 pt-3 pb-5">
                                                         <div class="d-flex align-items-start">
                                                             <div class="flex-shrink-0">
-                                                                <img src="https://themesbrand.com/minia/layouts/assets/images/users/avatar-1.jpg"
-                                                                    class="avatar-md img-fluid rounded-circle"
-                                                                    alt="...">
+                                                                <img src="{{ asset('cms/assets/img/logo.png') }}"
+                                                                    class="avatar-md img-fluid rounded-circle">
                                                             </div>
-                                                            <div class="flex-grow-1 ms-3 mb-4">
+                                                            {{-- <div class="flex-grow-1 ms-3 mb-4">
                                                                 <h5 class="font-size-18 text-white">Richard Drews
                                                                 </h5>
                                                                 <p class="mb-0 text-white-50">Web Designer</p>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -211,11 +208,11 @@
                                                                     class="avatar-md img-fluid rounded-circle"
                                                                     alt="...">
                                                             </div>
-                                                            <div class="flex-grow-1 ms-3 mb-4">
+                                                            {{-- <div class="flex-grow-1 ms-3 mb-4">
                                                                 <h5 class="font-size-18 text-white">Rosanna French
                                                                 </h5>
                                                                 <p class="mb-0 text-white-50">Web Developer</p>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>

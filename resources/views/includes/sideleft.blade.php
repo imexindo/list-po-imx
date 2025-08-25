@@ -40,7 +40,7 @@
     <li class="">
         @can('relokasi_access')
             <a href="{{ route('relokasi.index') }}">
-                <i class="fa fa-folder-open" style="font-size:16px"></i>
+                <i class="fa fa-file-text" style="font-size:16px"></i>
                 <span data-key="t-dashboard">Relokasi</span>
             </a>
         @endcan
@@ -69,6 +69,15 @@
             <a href="{{ route('geser.index') }}">
                 <i class="fa fa-calendar-plus" style="font-size:16px"></i>
                 <span data-key="t-dashboard">Geser</span>
+            </a>
+        @endcan
+    </li>
+
+    <li class="">
+        @can('laporan_access')
+            <a href="{{ route('laporan.index') }}">
+                <i class="fa fa-folder-open" style="font-size:16px"></i>
+                <span data-key="t-dashboard">Laporan</span>
             </a>
         @endcan
     </li>

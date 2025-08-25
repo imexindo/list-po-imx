@@ -10,6 +10,7 @@ use App\Http\Controllers\DcController;
 use App\Http\Controllers\extSementaraController;
 use App\Http\Controllers\GeserController;
 use App\Http\Controllers\InputSpkController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PasangBaruController;
 use App\Http\Controllers\PutusController;
 use App\Http\Controllers\RelokasiController;
@@ -92,6 +93,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/get', [GeserController::class, 'getPO'])->name('geser.get');
         Route::get('/get/edit/{id}', [GeserController::class, 'getPOById'])->name('geser.getById');
         Route::put('/get/update/{id}', [GeserController::class, 'update'])->name('geser.update');
+    });
+
+    Route::middleware(['permission:laporan_access'])->prefix('laporan')->group(function () {
+        Route::get('/', [LaporanController::class, 'index'])->name('laporan.index');
+        Route::get('/export', [LaporanController::class, 'export'])->name('laporan.export');
     });
 
 

@@ -44,8 +44,8 @@ class InputSpkController extends Controller
     {
         $query = PO::query()
             ->with('category_by_menu')
-            ->orderBy('created_at', 'desc')
-            ->limit(10);
+            ->orderBy('created_at', 'desc');
+            // ->limit(10);
 
         return DataTables::of($query)
             ->addIndexColumn()
